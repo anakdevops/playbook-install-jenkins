@@ -1,0 +1,14 @@
+---
+- name: Install Jenkins
+  hosts: localhost
+  connection: local
+  vars:
+    jenkins_port: "8082"
+    jenkins_tag: "jdk17"
+  tasks:
+    - name: Install Jenkins on top of Docker
+      docker_container:
+        name: jenkins2
+        image: jenkins/jenkins:{{ jenkins_tag }}
+        pull: yes
+        published_ports: "{{ jenkins_port }}:8080"
